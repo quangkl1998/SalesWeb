@@ -1,4 +1,4 @@
-export class Product {
+class Product {
     constructor(
         name,
         price,
@@ -23,8 +23,35 @@ export class Product {
         this.quantity = quantity;
     };
 
-    total() {
-        return this.price;
+    totalPrice(){
+        return this.quantity * this.price;
+    }
+
+    renderItemCart(){
+        return `
+            <tr>
+                <td>
+                    <img src="${this.img}" alt="${this.image}" width="100px" height="60px">
+                </td>
+                <td>
+                    <p>${this.name}</p>
+                </td>
+                <td>
+                    <p>${this.price}</p>
+                </td>
+                <td>
+                    <button ${this.quantity === 1 ? 'disabled' : ''} class="btn btn-success btn-sm" onclick="changeQuantity('${this.id}', -1)">-</button>
+                    <span> ${this.quantity} </span>
+                    <button class="btn btn-success btn-sm" onclick="changeQuantity(${this.id}, 1)">+</button>
+                </td>
+                <td>
+                    <p>${this.totalPrice()}</p>
+                </td>
+                <td>
+                    <button onclick="deleteCart('${this.id}')" class="btn btn-light"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>
+        `;
     };
 
     render() {
@@ -39,7 +66,7 @@ export class Product {
                         <p class="item-price">Price: ${this.price}</p>
                     </div>
                     <div class="cart">
-                        <button class="btn btn-success" onclick="addCart(${this.id})">Thêm vào giỏ hàng</button>
+                        <button class="btn btn-success" onclick="addCart('${this.id}')">Thêm vào giỏ hàng</button>
                     </div>
                     <!-- Modal -->
                     <div class="modal fade" id="product-${this.id}" tabindex="-1" aria-labelledby="#product-${this.id}-Label" aria-hidden="true">

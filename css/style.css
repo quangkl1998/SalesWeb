@@ -29,6 +29,7 @@
 .image{
     height: 300px;
     border-bottom: 1px solid #d4cdcd;
+    overflow: hidden;
 }
 
 .item img{
@@ -62,8 +63,6 @@
 .modal-dialog{
     max-width: 720px;
 }
-
-
 
 
 
